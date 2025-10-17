@@ -1,0 +1,24 @@
+services:
+ db:
+  container_name: postgres_db_compose_service
+  image: postgres
+  volumes:
+   - pgdata:/var/lib/postgresql/data
+  environment:
+    - POSTGRES_USER=admin
+    - POSTGRES_PASSWORD=123456
+    - POSTGRES_DB=pdb_compose_test
+
+ pgAdmin:
+  depends_on:
+   - db
+  container_name: pgadmin_compose_service
+  image: dpage/pgadmin4
+  ports:
+    - "8080:80"
+  environment:
+    - PGADMIN_DEFAULT_EMAIL=myemail@example.com
+    - PGADMIN_DEFAULT_PASSWORD=123456
+
+volumes:
+  pgdata:
