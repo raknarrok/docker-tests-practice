@@ -1,24 +1,18 @@
 services:
  db:
-  container_name: postgres_db_compose_service
-  image: postgres
+  container_name: mongo_db_compose_service
+  image: mongo
   volumes:
-   - pgdata:/var/lib/postgresql/data
-  environment:
-    - POSTGRES_USER=admin
-    - POSTGRES_PASSWORD=123456
-    - POSTGRES_DB=pdb_compose_test
-
- pgAdmin:
-  depends_on:
-   - db
-  container_name: pgadmin_compose_service
-  image: dpage/pgadmin4
+   - mongo_data:/data/db
   ports:
-    - "8080:80"
+   - 27017:27017
   environment:
-    - PGADMIN_DEFAULT_EMAIL=myemail@example.com
-    - PGADMIN_DEFAULT_PASSWORD=123456
+    - MONGO_INITDB_ROOT_USERNAME=admin
+    - MONGO_INITDB_ROOT_PASSWORD=123456
+    - MONGO_INITDB_DATABASE=mdatabase_test
+  restart: unless-stopped
+  command: ["mongod", "--auth"]
 
 volumes:
-  pgdata:
+  mongo_data:
+    external: false
