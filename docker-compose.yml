@@ -1,17 +1,30 @@
 services:
- db:
-  container_name: mongo_db_compose_service
+ mongo:
+  container_name: ${MONGO_INITDB_DATABASE}
   image: mongo
   volumes:
    - mongo_data:/data/db
   ports:
    - 27017:27017
   environment:
-    - MONGO_INITDB_ROOT_USERNAME=admin
-    - MONGO_INITDB_ROOT_PASSWORD=123456
-    - MONGO_INITDB_DATABASE=mdatabase_test
+    - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+    - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
   restart: unless-stopped
   command: ["mongod", "--auth"]
+
+ mongo-express:
+  depends_on:
+   - mongo
+  image: mongo-express
+  ports:
+   - 8081:8081
+  environment:
+    - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_INITDB_ROOT_USERNAME}
+    - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    - ME_CONFIG_MONGODB_SERVER=mongo
+    - ME_CONFIG_MONGODB_PORT=27017
+  restart: unless-stopped
 
 volumes:
   mongo_data:
