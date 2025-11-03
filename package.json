@@ -1,0 +1,23 @@
+{
+  "name": "docker-tests-practice",
+  "version": "1.0.0",
+  "description": "This project demonstrates how to use Docker Compose to set up a PostgreSQL database with pgAdmin for database management.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raknarrok/docker-tests-practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raknarrok/docker-tests-practice/issues"
+  },
+  "homepage": "https://github.com/raknarrok/docker-tests-practice#readme",
+  "dependencies": {
+    "node-cron": "^4.2.1"
+  }
+}
