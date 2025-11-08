@@ -4,7 +4,8 @@
   "description": "This project demonstrates how to use Docker Compose to set up a PostgreSQL database with pgAdmin for database management.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:ci": "jest --passWithNoTests --silent --ci",
     "start": "node app.js"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "homepage": "https://github.com/raknarrok/docker-tests-practice#readme",
   "dependencies": {
     "node-cron": "^4.2.1"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
   }
 }

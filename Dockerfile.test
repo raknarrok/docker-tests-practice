@@ -1,0 +1,17 @@
+FROM node:19.2-alpine3.16
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Run tests and exit
+RUN npm run test -- --maxWorkers=1
+
+# This stage is just for testing, no CMD needed
