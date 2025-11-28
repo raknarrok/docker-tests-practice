@@ -16,5 +16,9 @@ COPY . .
 # Execute tests with specific Jest configuration
 RUN npm run test -- --maxWorkers=1
 
+RUN rm -rf test && rm rm -rf node_modules
+
+RUN npm install --prod
+
 # Start the application
 CMD ["node", "app.js"]
